@@ -168,7 +168,8 @@ An interactive **Streamlit web application** (`ppe_app/app.py`) provides:
 
 The trained weights are included at `ppe_app/weights/ppe_best_model_baseline.pt`.
 
-> **Tip:** Use the sample media in `Try - Images & Videos/` to test the app immediately after setup.
+<img width="1917" height="886" alt="Screenshot 2026-08-29 132705" src="https://github.com/user-attachments/assets/ce8837d4-70cc-4f31-8b4d-66824fd20e2b" />
+<img width="1912" height="853" alt="Screenshot 2026-08-29 132725" src="https://github.com/user-attachments/assets/22b7cfda-d167-451f-ac50-26f3477e3ab5" />
 
 ---
 
@@ -196,21 +197,6 @@ streamlit run app.py
 ```
 
 Open `http://localhost:8501` in your browser, then upload an image or video from `Try - Images & Videos/` (or your own construction-site footage).
-
-### 4) Deploy (optional) ☁️
-
-**Streamlit Community Cloud** — push the repo to GitHub and connect at [share.streamlit.io](https://share.streamlit.io), pointing to `ppe_app/app.py`.
-
-**Docker:**
-
-```dockerfile
-FROM python:3.11-slim
-WORKDIR /app
-COPY . .
-RUN pip install --no-cache-dir -r requirements.txt
-EXPOSE 8501
-CMD ["streamlit", "run", "app.py", "--server.address=0.0.0.0"]
-```
 
 ---
 
