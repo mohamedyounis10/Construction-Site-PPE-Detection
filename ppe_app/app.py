@@ -28,7 +28,9 @@ from ultralytics import YOLO
 
 # Config
 APP_TITLE = "🦺 Construction Site PPE Detector"
-DEFAULT_WEIGHTS_PATH = r"C:\Users\moham\Desktop\Axis\Project 3 - Final\ppe_app\weights\ppe_best_model_baseline.pt"
+
+# path 
+DEFAULT_WEIGHTS_PATH = "ppe_app/weights/ppe_best_model_baseline.pt"
 IMG_SIZE = 640
 
 CLASS_NAMES = [
