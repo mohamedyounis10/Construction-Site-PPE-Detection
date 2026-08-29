@@ -158,6 +158,8 @@ The model is trained on the **Construction Site Safety** dataset from Roboflow (
 <a id="streamlit-app"></a>
 ## Streamlit App 🖥️
 
+🚀 **Live Demo:** The application is now hosted and live! You can try it out directly here: **[Insert your Streamlit app link here]**
+
 An interactive **Streamlit web application** (`ppe_app/app.py`) provides:
 
 - **Image detection** — upload a photo, see original vs. annotated output side-by-side.
