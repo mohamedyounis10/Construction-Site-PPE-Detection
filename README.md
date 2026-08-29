@@ -158,7 +158,7 @@ The model is trained on the **Construction Site Safety** dataset from Roboflow (
 <a id="streamlit-app"></a>
 ## Streamlit App 🖥️
 
-🚀 **Live Demo:** The application is now hosted and live! You can try it out directly here: **[Insert your Streamlit app link here]**
+🚀 **Live Demo:** The application is now hosted and live! You can try it out directly here: **[https://construction-site-ppe-detection-dn9yzcealhudmnvrggnf2u.streamlit.app/]**
 
 An interactive **Streamlit web application** (`ppe_app/app.py`) provides:
 
@@ -170,8 +170,8 @@ An interactive **Streamlit web application** (`ppe_app/app.py`) provides:
 
 The trained weights are included at `ppe_app/weights/ppe_best_model_baseline.pt`.
 
-<img width="1917" height="886" alt="Screenshot 2026-08-29 132705" src="https://github.com/user-attachments/assets/ce8837d4-70cc-4f31-8b4d-66824fd20e2b" />
-<img width="1912" height="853" alt="Screenshot 2026-08-29 132725" src="https://github.com/user-attachments/assets/22b7cfda-d167-451f-ac50-26f3477e3ab5" />
+<img width="1892" height="897" alt="Screenshot 2026-08-29 142538" src="https://github.com/user-attachments/assets/b3dfea03-dffd-4770-9ff6-d2ada9ff0515" />
+<img width="1892" height="882" alt="Screenshot 2026-08-29 142518" src="https://github.com/user-attachments/assets/5f0e714f-0618-4af8-8780-1797861a5eae" />
 
 ---
 
