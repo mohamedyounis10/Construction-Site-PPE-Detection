@@ -28,8 +28,6 @@ from ultralytics import YOLO
 
 # Config
 APP_TITLE = "🦺 Construction Site PPE Detector"
-
-# path 
 DEFAULT_WEIGHTS_PATH = "ppe_app/weights/ppe_best_model_baseline.pt"
 IMG_SIZE = 640
 
@@ -91,39 +89,152 @@ TEST_SET_COMPARISON = pd.DataFrame([
     {"model": "Final combined model (CBAM+Staged+CustomLoss)", "mAP50": 0.669, "mAP50-95": 0.409, "precision": 0.838, "recall": 0.582},
 ])
 
-st.set_page_config(page_title="PPE Detector", page_icon="🦺", layout="wide")
+st.set_page_config(
+    page_title="PPE Detector",
+    page_icon="🦺",
+    layout="wide"
+)
 
+# Custom UI Styling
+st.markdown("""
+<style>
+
+    /* 
+       ABOUT PROJECT TEXT
+    */
+
+    /* Main text inside About Project */
+    .stMarkdown p {
+        font-size: 20px !important;
+        line-height: 1.7 !important;
+    }
+
+    /* Lists inside About Project */
+    .stMarkdown li {
+        font-size: 19px !important;
+        line-height: 1.7 !important;
+        margin-bottom: 6px;
+    }
+
+    /* About Project headings */
+    h2 {
+        font-size: 32px !important;
+    }
+
+    h3 {
+        font-size: 26px !important;
+    }
+
+    /* Expanders text */
+    [data-testid="stExpander"] {
+        font-size: 19px !important;
+    }
+
+    [data-testid="stExpander"] p {
+        font-size: 19px !important;
+        line-height: 1.7 !important;
+    }
+
+    [data-testid="stExpander"] li {
+        font-size: 19px !important;
+        line-height: 1.7 !important;
+    }
+
+
+    /* 
+       TAB NAVIGATION
+       */
+
+    /* Tab names */
+    button[data-baseweb="tab"] {
+        font-size: 20px !important;
+        font-weight: 600 !important;
+        padding: 14px 24px !important;
+    }
+
+    /* Tab icons */
+    button[data-baseweb="tab"] svg {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+
+    /* 
+       SIDEBAR SLIDERS
+     */
+
+    /* Slider label */
+    div[data-testid="stSlider"] label {
+        font-size: 18px !important;
+        font-weight: 600 !important;
+    }
+
+    /* Slider value */
+    div[data-testid="stSlider"] [data-testid="stThumbValue"] {
+        font-size: 17px !important;
+    }
+
+    /* Slider track */
+    div[data-testid="stSlider"] [role="slider"] {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    /* Slider itself */
+    div[data-testid="stSlider"] {
+        padding-top: 8px !important;
+        padding-bottom: 12px !important;
+    }
+
+
+    /* 
+       SIDEBAR GENERAL TEXT
+        */
+
+    section[data-testid="stSidebar"] label {
+        font-size: 18px !important;
+    }
+
+    section[data-testid="stSidebar"] p {
+        font-size: 17px !important;
+    }
+
+
+    /*
+       METRICS
+       */
+
+    [data-testid="stMetricValue"] {
+        font-size: 32px !important;
+    }
+
+    [data-testid="stMetricLabel"] {
+        font-size: 18px !important;
+    }
+
+</style>
+""", unsafe_allow_html=True)
 
 # Model loading
 @st.cache_resource(show_spinner="Loading model weights...")
 def load_model(weights_path: str):
     return YOLO(weights_path)
 
-
 def get_model():
-    """Resolve weights from the default path, or let the user point to one."""
     with st.sidebar:
         st.markdown("### ⚙️ Model")
+        
         weights_path = st.text_input(
-            "Weights path (.pt)", value=DEFAULT_WEIGHTS_PATH,
-            help="Path to best.pt on disk. Change this if your weights live elsewhere.",
-        )
-        uploaded_weights = st.file_uploader(
-            "...or upload a weights file (.pt)", type=["pt"],
-            help="Useful for quick local testing without editing the path above.",
+            "Weights path (.pt)", 
+            value=DEFAULT_WEIGHTS_PATH,
+            help="Path is locked for the hosted version.",
+            disabled=True  
         )
 
-    if uploaded_weights is not None:
-        tmp_dir = tempfile.mkdtemp()
-        tmp_path = os.path.join(tmp_dir, "uploaded_weights.pt")
-        with open(tmp_path, "wb") as f:
-            f.write(uploaded_weights.getbuffer())
-        return load_model(tmp_path)
+    if os.path.exists(DEFAULT_WEIGHTS_PATH):
+        return load_model(DEFAULT_WEIGHTS_PATH)
 
-    if os.path.exists(weights_path):
-        return load_model(weights_path)
-
-    st.sidebar.error(f"No weights found at `{weights_path}`.")
+    st.sidebar.error(f"No weights found at `{DEFAULT_WEIGHTS_PATH}`.")
     return None
 
 # Clean box drawing (kept close to the original photo, thin boxes only)
@@ -176,7 +287,6 @@ def summarize_detections(result) -> pd.DataFrame:
     names = [result.names[i] for i in cls_ids]
     counts = pd.Series(names).value_counts().rename_axis("class").reset_index(name="count")
     return counts
-
 
 def render_violation_banner(counts_df: pd.DataFrame):
     if counts_df.empty:
