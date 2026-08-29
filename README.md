@@ -170,8 +170,7 @@ An interactive **Streamlit web application** (`ppe_app/app.py`) provides:
 
 The trained weights are included at `ppe_app/weights/ppe_best_model_baseline.pt`.
 
-<img width="1892" height="897" alt="Screenshot 2026-08-29 142538" src="https://github.com/user-attachments/assets/b3dfea03-dffd-4770-9ff6-d2ada9ff0515" />
-<img width="1892" height="882" alt="Screenshot 2026-08-29 142518" src="https://github.com/user-attachments/assets/5f0e714f-0618-4af8-8780-1797861a5eae" />
+<img width="1882" height="802" alt="Screenshot 2026-08-29 144659" src="https://github.com/user-attachments/assets/c81e1f6b-79b6-4db0-bf6b-f87b254e47d8" />
 
 ---
 
